@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEA NEWS — Template DM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: #222222;
+    --text: #e0e0e0;
+    --muted: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  header {
+    text-align: center;
+    padding: 32px 0 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  header p {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+  }
+
+  .card:active {
+    transform: scale(0.985);
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .if-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .copy-icon {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .card:hover .copy-icon {
+    color: var(--gold-light);
+  }
+
+  .card-body {
+    padding: 14px 16px 16px;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #bbb;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gold);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .cold-badge {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 10px;
+    padding: 10px 14px 6px;
+    margin-bottom: 4px;
+  }
+
+  .cold-badge .if-label {
+    font-size: 0.6rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SEA NEWS</h1>
+  <p>Template DM — Tap untuk copy</p>
+</header>
+
+<div class="grid">
+
+  <!-- IF DEAL -->
+  <div class="card" onclick="copyText(this)" data-text="Siap kak! Mau liput tentang apa? 🙌">
+    <div class="card-header">
+      <span class="if-label">✅ Deal / Mau</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Siap kak! Mau liput tentang apa? 🙌</div>
+  </div>
+
+  <!-- IF CONFUSED -->
+  <div class="card" onclick="copyText(this)" data-text="Kami bisa bantu liput atau promosiin apapun yang kakak mau — sirkel, bisnis, profil, server, dll. Mulai 5rb aja 🙌
+Mau coba?">
+    <div class="card-header">
+      <span class="if-label">❓ Confused / Gak Ngerti</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Kami bisa bantu liput atau promosiin apapun yang kakak mau — sirkel, bisnis, profil, server, dll. Mulai 5rb aja 🙌
+Mau coba?</div>
+  </div>
+
+  <!-- IF TANYA BISA BAHAS -->
+  <div class="card" onclick="copyText(this)" data-text="Bisa kak! Kami bisa liput apa aja di ekosistem ini— sirkel, bisnis, server, personal, apapun 😊">
+    <div class="card-header">
+      <span class="if-label">🤔 Tanya Bisa Bahas Topik?</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Bisa kak! Kami bisa liput apa aja di ekosistem ini— sirkel, bisnis, server, personal, apapun 😊</div>
+  </div>
+
+  <!-- IF CARA ORDER -->
+  <div class="card" onclick="copyText(this)" data-text="Siap kak! Caranya gampang kok 😊
+
+1. Transfer dulu ke Dana atau gopay:
+🔰 088214764360 (~Akmal)
+
+2. Kirim bukti TF di sini ya kak
+
+3. Upload bahan fotonya di:
+👉 https://upload-sea.vercel.app/
+
+Selesai! Nanti kami proses dalam 1 jam 🙌">
+    <div class="card-header">
+      <span class="if-label">📦 Tanya Cara Order</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Siap kak! Caranya gampang kok 😊
+
+1. Transfer dulu ke Dana atau gopay:
+🔰 088214764360 (~Akmal)
+
+2. Kirim bukti TF di sini ya kak
+
+3. Upload bahan fotonya di:
+👉 https://upload-sea.vercel.app/
+
+Selesai! Nanti kami proses dalam 1 jam 🙌</div>
+  </div>
+
+  <!-- IF TANYA LAMA -->
+  <div class="card" onclick="copyText(this)" data-text="Tergantung antrian kak, biasanya sekitar 1-2 jam setelah bahan masuk 🙌">
+    <div class="card-header">
+      <span class="if-label">⏱ Tanya Lama Pengerjaan</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Tergantung antrian kak, biasanya sekitar 1-2 jam setelah bahan masuk 🙌</div>
+  </div>
+
+  <!-- IF TANYA CONTOH -->
+  <div class="card" onclick="copyText(this)" data-text="Berita Foto =  foto kakak kami tambahin teks headline besar di tengah, kayak berita media pada umumnya 📰
+
+Video Cerita (premium) = video slideshow foto dari kakak dengan narasi suara, subtitle, & efek. Bisa request semuanya sesuai keinginan kakak 🎬
+
+Video Cerita (standar) = sama kayak premium tapi hasil otomatis, kakak tinggal kirim foto & narasi langsung jadi ⚡">
+    <div class="card-header">
+      <span class="if-label">🎬 Tanya Contoh / Apa Itu</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Berita Foto = foto + teks headline besar di tengah 📰
+Video Cerita (premium) = slideshow + narasi + efek, bisa request 🎬
+Video Cerita (standar) = sama tapi otomatis, kirim bahan langsung jadi ⚡</div>
+  </div>
+
+  <!-- IF HARGA BUNDLE -->
+  <div class="card" onclick="copyText(this)" data-text="Kalau ambil semua totalnya 35k kak 🙌
+
+Opsional: video standarnya bisa di-upgrade jadi premium (dikerjain manual) totalnya jadi 45k — hasilnya lebih maksimal.">
+    <div class="card-header">
+      <span class="if-label">💰 Tanya Harga Bundle</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Kalau ambil semua totalnya 35k kak 🙌
+
+Opsional: video standarnya bisa di-upgrade jadi premium (dikerjain manual) totalnya jadi 45k — hasilnya lebih maksimal.</div>
+  </div>
+
+  <!-- IF GHOST -->
+  <div class="card" onclick="copyText(this)" data-text="Halo kak! Slot minggu ini hampir penuh nih, masih mau kami amankan? ⚡">
+    <div class="card-header">
+      <span class="if-label">👻 Ghost / Janji Ngilang</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Halo kak! Slot minggu ini hampir penuh nih, masih mau kami amankan? ⚡</div>
+  </div>
+
+  <!-- IF DONE - REPEAT ORDER -->
+  <div class="card" onclick="copyText(this)" data-text="Kak kontennya udah selesai ya, semoga hasilnya sesuai ekspektasi! 🙏
+
+Kalau mau liput lagi kapanpun, langsung kabarin kami aja — kakak udah tau prosesnya 😊
+
+Oh ya, kalau ada teman yang mau diliput juga, boleh banget di-refer ke kami ya kak! Kami siap bantu 🙌">
+    <div class="card-header">
+      <span class="if-label">🏁 Project Done</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Kak kontennya udah selesai ya, semoga hasilnya sesuai ekspektasi! 🙏
+
+Kalau mau liput lagi kapanpun, langsung kabarin kami aja 😊
+Kalau ada teman yang mau diliput juga, boleh banget di-refer ke kami ya kak! 🙌</div>
+  </div>
+
+  <!-- IF MINTA MENTAHAN -->
+  <div class="card" onclick="copyText(this)" data-text="Untuk versi tanpa backsound udah kami upload kak, bisa download sendiri lewat:
+👉 https://ssstik.io/id
+Tinggal masukin link TikTok-nya aja 🙏">
+    <div class="card-header">
+      <span class="if-label">📥 Minta Mentahan / No Music</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Untuk versi tanpa backsound udah kami upload kak, bisa download sendiri lewat:
+👉 https://ssstik.io/id
+Tinggal masukin link TikTok-nya aja 🙏</div>
+  </div>
+
+  <!-- IF PAMITAN -->
+  <div class="card" onclick="copyText(this)" data-text="Siap kak, makasih udah mau dengerin kami 🙏
+
+Kalau suatu saat mau liput atau promosiin sesuatu, langsung DM kami aja ya — kami selalu ada! 😊">
+    <div class="card-header">
+      <span class="if-label">👋 Close / Pamitan</span>
+      <span class="copy-icon">tap to copy</span>
+    </div>
+    <div class="card-body">Siap kak, makasih udah mau dengerin kami 🙏
+
+Kalau suatu saat mau liput atau promosiin sesuatu, langsung DM kami aja ya — kami selalu ada! 😊</div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">✓ Tersalin</div>
+
+<script>
+  function copyText(card) {
+    const text = card.getAttribute('data-text');
+    navigator.clipboard.writeText(text).then(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    });
+  }
+</script>
+</body>
+</html>
